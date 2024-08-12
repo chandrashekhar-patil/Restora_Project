@@ -1,9 +1,9 @@
-# 🌟 Restora_Project
+# 🌟 Restora Hotel Booking Project
 
 **Click this Frontend & Backend Connectivity :** https://drive.google.com/file/d/1LU7Ved4oUVxVbpP0N70pcfJaL4vgdjTI/view?usp=sharing
 
 # 📦 MySQL Database Technology Overview 
-*The Restora database consists of the following tables:*
+`The Restora database consists of the following tables:`
 
 - Customer
 - Hotel
@@ -29,7 +29,7 @@
 - Bootrap
 - JavaScript
   
-*Welcome to the API documentation for the Restora project. This file provides a brief overview of the available API endpoints, their purpose, and how to use them.*
+`Welcome to the API documentation for the Restora project. This file provides a brief overview of the available API endpoints, their purpose, and how to use them.`
 
 List of APIs : 
 - booking.js 
@@ -41,9 +41,9 @@ List of APIs :
 - register.js 
 - search.js 
 - visit.js 
-
  
-*Welcome to the pages documentation for the Restora project. This file provides an overview of the different pages available in the application and their functionalities.*
+`Wellcome to the pages documentation for the Restora project. This file provides an overview of the different pages available in the application and their functionalities.`
+
 List of Pages : 
 - login 
 - registration 
