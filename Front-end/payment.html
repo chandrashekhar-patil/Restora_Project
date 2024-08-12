@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Restora</title>
+    <link rel="stylesheet" href="style/payment.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="home.html" class="logo">
+                <img src="style/image/logo.png" alt="Restora Logo">
+            </a>
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="booking.html#booking">Book a Room</a>
+                <a href="home.html#recommendations">Recommendations</a>
+                <a href="contact.html#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Complete Your Payment</h1>
+            <form id="payment-form">
+                <input type="hidden" id="bookingId" name="bookingId">
+
+                <label for="upi-id">Enter Your UPI ID:</label>
+                <input type="text" id="upi-id" name="upi-id" required>
+
+                <button type="submit" class="action-btn">Confirm Payment</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Restora. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookingId = urlParams.get('booking_id');
+        
+            if (bookingId) {
+                document.getElementById('bookingId').value = bookingId;
+            } else {
+                console.error("Missing booking_id in URL parameters.");
+            }
+        
+            document.getElementById('payment-form').addEventListener('submit', (event) => {
+                event.preventDefault();
+        
+                const upiId = document.getElementById('upi-id').value;
+                const bookingId = document.getElementById('bookingId').value;
+        
+                if (upiId && bookingId) {
+                    fetch('http://localhost:3000/complete_booking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            hotel_id: bookingId,  // Adjust if necessary
+                            customer_id: 1,       // Replace with actual customer ID
+                            upi_id: upiId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Payment confirmed and booking completed!');
+                            window.location.href = 'home.html';  // Redirect to home page or another page as needed
+                        } else {
+                            alert('Failed to complete payment.');
+                        }
+                    })
+                    .catch(error => console.error('Error completing payment:', error));
+                }
+            });
+        });
+        
+    </script>
+</body>
+</html>
