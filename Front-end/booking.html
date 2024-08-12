@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Room - Restora</title>
+    <link rel="stylesheet" href="style/booking.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="home.html" class="logo">
+                <img src="style/image/logo.png" alt="Restora Logo">
+            </a>
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="booking.html#booking">Book a Room</a>
+                <a href="home.html#recommendations">Recommendations</a>
+                <a href="contact.html#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Book Your Stay</h1>
+            <form id="booking-form">
+                <input type="hidden" id="hotelId" name="hotelId">
+                <input type="hidden" id="userId" name="userId">
+
+                <label for="userName">User Name</label>
+                <input type="text" id="userName" name="userName" readonly>
+
+                <label for="hotelName">Hotel Name</label>
+                <input type="text" id="hotelName" name="hotelName" readonly>
+
+                <label for="noOfNights">Number of Nights</label>
+                <input type="number" id="noOfNights" name="noOfNights" required>
+
+                <label for="noOfPeople">Number of People</label>
+                <input type="number" id="noOfPeople" name="noOfPeople" required>
+
+                <label for="checkIn">Check-In Date</label>
+                <input type="date" id="checkIn" name="checkIn" required>
+
+                <label for="checkOut">Check-Out Date</label>
+                <input type="date" id="checkOut" name="checkOut" required>
+
+                <button type="submit" id="confirmBooking">Proceed to Payment</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Restora. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hotelId = urlParams.get('hotel_id');
+            const userId = localStorage.getItem('s_id');
+    
+            if (hotelId && userId) {
+                document.getElementById('hotelId').value = hotelId;
+                document.getElementById('userId').value = userId;
+    
+                fetch('http://localhost:3000/hotel_details', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: hotelId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('hotelName').value = data.data.name;
+                    }
+                })
+                .catch(error => console.error('Error fetching hotel details:', error));
+    
+                fetch('http://localhost:3000/user_details', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: userId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('userName').value = data.data.name + " " + data.data.lname;
+                    }
+                })
+                .catch(error => console.error('Error fetching user details:', error));
+            } else {
+                console.error("Missing hotelId or userId in URL parameters.");
+            }
+
+            document.getElementById('booking-form').addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(event.target);
+                const data = Object.fromEntries(formData.entries());
+                data.payment_status = 'Pending';
+
+                fetch('http://localhost:3000/insert_booking', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Redirect to payment page with booking ID
+                        window.location.href = `payment.html?booking_id=${data.booking_id}`;
+                    } else {
+                        alert('Failed to confirm booking.');
+                    }
+                })
+                .catch(error => console.error('Error confirming booking:', error));
+            });
+        });
+    </script>
+</body>
+</html>

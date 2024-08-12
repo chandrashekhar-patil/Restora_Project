@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Welcome to the most luxurious hotel in Noida, Uttar Pradesh">
+  <meta name="keywords" content="hotel, noida hotel, luxurious hotels in noida">
+  <script src="https://kit.fontawesome.com/e7783e5772.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./style/contact.css">
+  <link rel="stylesheet" media="screen and (max-width: 769px)" 
+  href="CSS/mobile.css">
+  <title>Hotel AR | Contact</title>
+  <style>
+    /* Basic styles for the popup */
+    .popup {
+        display: none; /* Hidden by default */
+        position: fixed; 
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .popup.show {
+        display: block; /* Show the popup */
+    }
+
+    .popup button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav id="navbar">
+      <div class="container">
+        <h1 class="logo"><a href="home.html">Restora</a></h1>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a class="current" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <section id="contact-form" class="py-3">
+    <div class="container">
+      <h1 class="l-heading">
+        <span class="text-primary">Contact</span> Us
+      </h1>
+      <p>Please fill out the form below to contact us</p>
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea name="message" id="message" required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  
+  <section id="contact-info" class="bg-dark">
+    <div class="container">
+      <div class="box">
+        <i class="fas fa-hotel fa-3x"></i>
+        <h3>Location</h3>
+        <p>Sector 62, Noida (U.P.)</p>
+      </div>
+      <div class="box">
+        <i class="fas fa-phone fa-3x"></i>
+        <h3>Phone Number</h3>
+        <p>(91)-8888-8888</p>
+      </div>
+      <div class="box">
+        <i class="fas fa-envelope fa-3x"></i>
+        <h3>Email Address</h3>
+        <p>ARhotel@lux.co</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popup Message -->
+  <div id="popup" class="popup">
+    <p>Thank you! Your message has been sent successfully.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <footer id="main-footer">
+    Hotel AR &copy; 2024, All Rights Reserved
+  </footer>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Show the popup
+      document.getElementById('popup').classList.add('show');
+    });
+
+    function closePopup() {
+      // Hide the popup
+      document.getElementById('popup').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+/* style.css */
+
+body {
+    background-color: #f4f7fc; /* Fallback color */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('./image/restora.jpg');/* Path to your background image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.wrapper {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    position: relative; /* Ensures the content appears above the background image */
+}
+
+.logo {
+    background-image: url('./image/logo.png'); /* Path to your logo image */
+    background-size: contain; /* Adjusts the logo size to fit within its container */
+    background-repeat: no-repeat; /* Prevents the logo from repeating */
+    background-position: center; /* Centers the logo image within its container */
+    height: 80px;
+    width: 100%; /* Adjust to fit the container */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center; /* Center text */
+}
+
+.form-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-field span {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 18px;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.form-field input:focus {
+    border-color: #333;
+    background-color: #fff;
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+    height: 40px;
+    background-color: #f13e11; /* Button color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+    font-size: 1rem;
+    letter-spacing: 1.3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2ee40a; /* Darker shade for hover effect */
+}
